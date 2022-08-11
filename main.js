@@ -39,7 +39,6 @@ let level = {
   Normal: 5,
   Hard: 4,
 };
-
 let playingDificulty;
 let selectLevel = document.querySelector("select");
 let levelSpan = document.querySelector(".lvl");
@@ -91,6 +90,11 @@ function playingMood() {
   }
   total.innerHTML = playingDificulty.length;
 }
+window.onload = function () {
+  if (playingDificulty.length != 0) {
+    time.innerHTML = +time.innerHTML + 2;
+  }
+};
 // Avoid Past
 input.onpaste = () => {
   return false;
@@ -101,9 +105,6 @@ start.onclick = function () {
   start.remove();
   input.focus();
   genWord();
-  time.innerHTML = +time.innerHTML + 2;
-};
-window.onload = () => {
   time.innerHTML = +time.innerHTML + 2;
 };
 // Genetate Word
