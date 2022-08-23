@@ -51,9 +51,9 @@ let result = document.querySelector(".finish");
 let total = document.querySelector(".total");
 let start = document.querySelector(".start");
 let currentWord = document.querySelector(".the-word");
+let progress = document.querySelector(".fill");
 let currentLevel = "Easy";
 let currentlevelSeconds;
-
 if (window.localStorage.getItem("time")) {
   document
     .querySelector(`[data-value="${window.localStorage.getItem("time")}"]`)
@@ -120,11 +120,11 @@ start.onclick = function () {
       clearInterval(interval);
       countDown.style.display = "none";
       input.style.display = "block";
+      progress.style.opacity = "1";
       input.focus();
       genWord();
       let subTime = setInterval(() => {
         subCounter++;
-        console.log(subCounter);
         if (playingDificulty.length === 0 && currentWord.innerHTML === "") {
           clearInterval(subTime);
         }
@@ -150,13 +150,13 @@ function genWord() {
   upcomingWord.innerHTML = "";
   // Show Upcoming playingDificulty
   Upcoming();
-  // Reset Time
   // Start Playing
   startPlaying();
 }
 
 // Upcoming playingDificulty
 function Upcoming() {
+  progress.style.width = "100%";
   for (let i = 0; i < playingDificulty.length; i++) {
     let div = document.createElement("div");
     div.innerHTML = playingDificulty[i];
@@ -173,6 +173,9 @@ function startPlaying() {
   // Count Down
   let start = setInterval(() => {
     time.innerHTML--;
+    progress.style.width = `${
+      ((+time.innerHTML + 0.3) * 100) / currentlevelSeconds
+    }%`;
     if (time.innerHTML === "0") {
       clearInterval(start);
       // Compare The Words
@@ -185,10 +188,15 @@ function startPlaying() {
           genWord();
         } else {
           document.querySelector(".checkmark").style.display = "block";
-          let control = document.querySelector(".control")
+          input.style.display = "none";
+          progress.style.display = "none";
+          document.querySelector(".message").style.opacity = "0";
+          let control = document.querySelector(".control");
           result.style.display = "none";
           control.className = "avarage";
-          control.innerHTML = `${Math.trunc((+gotScore.innerHTML / +subCounter) * 60)} W / Min`;
+          control.innerHTML = `${Math.trunc(
+            (+gotScore.innerHTML / +subCounter) * 60
+          )} W / Min`;
           currentWord.innerHTML = "";
           tryAgain();
         }
@@ -196,11 +204,26 @@ function startPlaying() {
       } else {
         let span = document.createElement("span");
         span.className = "bad";
+        input.blur();
+        input.style.opacity = ".5";
+        progress.style.opacity = ".5";
         let spanText = document.createTextNode("Game Over");
         span.appendChild(spanText);
         result.appendChild(span);
         // Restart The Game
         tryAgain();
+      }
+      if (
+        time.innerHTML === "1" &&
+        !document.querySelector(".finish").hasChildNodes()
+      ) {
+        // progress.style.width = "100%";
+        input.onkeyup = false;
+      } else if (
+        time.innerHTML === "0" &&
+        document.querySelector(".finish").hasChildNodes()
+      ) {
+        progress.style.width = "0";
       }
     } else {
       toNext(start);
@@ -221,18 +244,25 @@ function toNext(interval) {
           genWord();
         } else {
           document.querySelector(".checkmark").style.display = "block";
-          let control = document.querySelector(".control")
+          document.querySelector(".message").style.opacity = "0";
+          let control = document.querySelector(".control");
           result.style.display = "none";
           control.className = "avarage";
-          control.innerHTML = `${Math.trunc((+gotScore.innerHTML / +subCounter) * 60)} W / Min`;
+          control.innerHTML = `${Math.trunc(
+            (+gotScore.innerHTML / +subCounter) * 60
+          )} W / Min`;
           input.onkeyup = false;
           currentWord.innerHTML = "";
+          progress.style.display = "none";
           input.style.display = "none";
           tryAgain();
         }
         // Show The Result
       } else {
         let span = document.createElement("span");
+        input.blur();
+        input.style.opacity = ".5";
+        progress.style.opacity = ".5";
         span.className = "bad";
         let spanText = document.createTextNode("Game Over");
         span.appendChild(spanText);

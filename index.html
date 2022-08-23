@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="shortcut icon" href="CSS/tab.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/all.min.css" />
+    <link rel="stylesheet" href="CSS/main.css" />
     <title>Typing Speed Test</title>
   </head>
   <body>
@@ -17,11 +19,11 @@
       <div class="container">
         <div class="intro">
           <div class="message">
-            Level:
-            <span class="lvl"></span>
-            <br />
-            Sec / W:
-            <span class="seconds"></span>
+            <p>Level: <span class="lvl"></span></p>
+            <p>
+              <i class="fa-solid fa-hourglass-half"></i>:
+              <span class="seconds"></span> sec
+            </p>
           </div>
           <select name="" id="level">
             <option data-value="Easy" value="">Easy</option>
@@ -189,10 +191,15 @@
         </div>
         <div class="start">Start Playing</div>
         <div class="the-word"></div>
-        <input type="text" class="input" />
+        <div class="porgress">
+          <input type="text" class="input" />
+          <div class="fill"></div>
+        </div>
         <div class="upcoming-words">Words Will Show Here</div>
         <div class="control">
-          <div class="time">Time Left: <span></span> Sec</div>
+          <div class="time">
+            <i class="fa-solid fa-hourglass-half"></i>: <span></span> Sec
+          </div>
           <div class="score">
             Score: <span class="got">0</span> From <span class="total"></span>
           </div>
