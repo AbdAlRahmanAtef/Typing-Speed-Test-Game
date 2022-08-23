@@ -124,7 +124,7 @@ select:focus {
 }
 .input {
   margin: 15px auto;
-  width: 80%;
+  width: 100%;
   display: none;
   height: 60px;
   transition: 0.3s;
