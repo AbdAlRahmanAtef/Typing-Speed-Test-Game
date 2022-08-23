@@ -10,26 +10,189 @@
   <body>
     <div class="game">
       <div class="name">Typing Speed Test Game</div>
+      <div class="count-down">
+        <span class="hide"></span>
+        <span class="show"></span>
+      </div>
       <div class="container">
-        <div class="select">
-          <label for="level">Select Level</label>
+        <div class="intro">
+          <div class="message">
+            Level:
+            <span class="lvl"></span>
+            <br />
+            Sec / W:
+            <span class="seconds"></span>
+          </div>
           <select name="" id="level">
             <option data-value="Easy" value="">Easy</option>
             <option data-value="Normal" value="">Normal</option>
             <option data-value="Hard" value="">Hard</option>
           </select>
         </div>
-        <div class="message">
-          You Are Playing On
-          <span class="lvl"></span> Level & You Have
-          <span class="seconds"></span> Seconds To Type The Word
+        <div class="checkmark">
+          <svg
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 161.2 161.2"
+            enable-background="new 0 0 161.2 161.2"
+            xml:space="preserve"
+          >
+            <path
+              class="path"
+              fill="none"
+              stroke="#446ccf"
+              stroke-miterlimit="10"
+              d="M425.9,52.1L425.9,52.1c-2.2-2.6-6-2.6-8.3-0.1l-42.7,46.2l-14.3-16.4
+              c-2.3-2.7-6.2-2.7-8.6-0.1c-1.9,2.1-2,5.6-0.1,7.7l17.6,20.3c0.2,0.3,0.4,0.6,0.6,0.9c1.8,2,4.4,2.5,6.6,1.4c0.7-0.3,1.4-0.8,2-1.5
+              c0.3-0.3,0.5-0.6,0.7-0.9l46.3-50.1C427.7,57.5,427.7,54.2,425.9,52.1z"
+            />
+            <circle
+              class="path"
+              fill="none"
+              stroke="#446ccf"
+              stroke-width="4"
+              stroke-miterlimit="10"
+              cx="80.6"
+              cy="80.6"
+              r="62.1"
+            />
+            <polyline
+              class="path"
+              fill="none"
+              stroke="#446ccf"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-miterlimit="10"
+              points="113,52.8 
+            74.1,108.4 48.2,86.4 "
+            />
+
+            <circle
+              class="spin"
+              fill="none"
+              stroke="#446ccf"
+              stroke-width="4"
+              stroke-miterlimit="10"
+              stroke-dasharray="12.2175,12.2175"
+              cx="80.6"
+              cy="80.6"
+              r="73.9"
+            />
+          </svg>
+          <h1>Great Job!</h1>
+        </div>
+        <div class="landing">
+          <svg width="100" height="100" viewBox="0 0 300 300">
+            <defs>
+              <linearGradient
+                id="gradient-fill"
+                gradientUnits="userSpaceOnUse"
+                x1="0"
+                y1="300"
+                x2="300"
+                y2="0"
+              >
+                <stop offset="0%">
+                  <animate
+                    attributeName="stop-color"
+                    values="#00E06B;#CB0255;#00E06B"
+                    dur="5s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="100%">
+                  <animate
+                    attributeName="stop-color"
+                    values="#04AFC8;#8904C5;#04AFC8"
+                    dur="8s"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+              </linearGradient>
+              <clipPath id="clip">
+                <rect
+                  class="square s1"
+                  x="0"
+                  y="0"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+                <rect
+                  class="square s2"
+                  x="100"
+                  y="0"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+                <rect
+                  class="square s3"
+                  x="200"
+                  y="0"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+                <rect
+                  class="square s4"
+                  x="0"
+                  y="100"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+                <rect
+                  class="square s5"
+                  x="200"
+                  y="100"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+                <rect
+                  class="square s6"
+                  x="0"
+                  y="200"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+                <rect
+                  class="square s7"
+                  x="100"
+                  y="200"
+                  rx="12"
+                  ry="12"
+                  height="90"
+                  width="90"
+                ></rect>
+              </clipPath>
+            </defs>
+            <rect
+              class="gradient"
+              clip-path="url('#clip')"
+              height="300"
+              width="300"
+            ></rect>
+          </svg>
         </div>
         <div class="start">Start Playing</div>
         <div class="the-word"></div>
         <input type="text" class="input" />
         <div class="upcoming-words">Words Will Show Here</div>
         <div class="control">
-          <div class="time">Time Left: <span></span> Seconds</div>
+          <div class="time">Time Left: <span></span> Sec</div>
           <div class="score">
             Score: <span class="got">0</span> From <span class="total"></span>
           </div>

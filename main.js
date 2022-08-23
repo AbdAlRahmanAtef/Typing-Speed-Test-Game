@@ -51,7 +51,7 @@ let result = document.querySelector(".finish");
 let total = document.querySelector(".total");
 let start = document.querySelector(".start");
 let currentWord = document.querySelector(".the-word");
-let currentLevel;
+let currentLevel = "Easy";
 let currentlevelSeconds;
 
 if (window.localStorage.getItem("time")) {
@@ -69,10 +69,8 @@ selectLevel.onchange = function () {
   currentLevel = selectLevel.options[selectLevel.selectedIndex].innerHTML;
   levelSpan.innerHTML = currentLevel;
   currentlevelSeconds = level[currentLevel];
-  time.innerHTML = currentlevelSeconds + 2;
   durationSpan.innerHTML = currentlevelSeconds;
   gotScore.innerHTML = "0";
-  // window.location.reload();
   playingMood();
   window.localStorage.setItem(
     "time",
@@ -91,22 +89,53 @@ function playingMood() {
   total.innerHTML = playingDificulty.length;
 }
 window.onload = function () {
-  if (playingDificulty.length != 0) {
-    time.innerHTML = +time.innerHTML + 2;
-  }
+  selectLevel.focus();
 };
 // Avoid Past
 input.onpaste = () => {
   return false;
 };
 
+let subCounter = 0;
 // Start The Game
+let countDown = document.querySelector(".count-down");
+let span = document.querySelector(".count-down span");
+let span2 = document.querySelector(".count-down .show");
 start.onclick = function () {
   start.remove();
-  input.focus();
-  genWord();
-  time.innerHTML = +time.innerHTML + 2;
+  document.querySelector(".landing").style.display = "none";
+  let counter = "4";
+  span.innerHTML = counter;
+  span2.innerHTML = "Three";
+  countDown.style.display = "block";
+  let interval = setInterval(() => {
+    span.innerHTML--;
+    if (span.innerHTML === "3") {
+      span2.innerHTML = "Two";
+    } else if (span.innerHTML === "2") {
+      span2.innerHTML = "One";
+    } else if (span.innerHTML === "1") {
+      span2.innerHTML = "Go";
+    } else {
+      clearInterval(interval);
+      countDown.style.display = "none";
+      input.style.display = "block";
+      input.focus();
+      genWord();
+      let subTime = setInterval(() => {
+        subCounter++;
+        console.log(subCounter);
+        if (playingDificulty.length === 0 && currentWord.innerHTML === "") {
+          clearInterval(subTime);
+        }
+      }, 1000);
+      upcomingWord.style.opacity = "1";
+      document.querySelector(".control").style.opacity = "1";
+      selectLevel.style.display = "none";
+    }
+  }, 1000);
 };
+
 // Genetate Word
 function genWord() {
   // Create Random Word
@@ -133,8 +162,10 @@ function Upcoming() {
     div.innerHTML = playingDificulty[i];
     upcomingWord.append(div);
   }
+  if (playingDificulty.length === 0 && currentWord.innerHTML === "") {
+    upcomingWord.style.display = "none";
+  }
 }
-
 // Start Playin
 function startPlaying() {
   // Reset Time
@@ -153,11 +184,11 @@ function startPlaying() {
         if (playingDificulty.length > 0) {
           genWord();
         } else {
-          let span = document.createElement("span");
-          span.className = "good";
-          let spanText = document.createTextNode("Well Done");
-          span.appendChild(spanText);
-          result.appendChild(span);
+          document.querySelector(".checkmark").style.display = "block";
+          let control = document.querySelector(".control")
+          result.style.display = "none";
+          control.className = "avarage";
+          control.innerHTML = `${Math.trunc((+gotScore.innerHTML / +subCounter) * 60)} W / Min`;
           currentWord.innerHTML = "";
           tryAgain();
         }
@@ -189,13 +220,14 @@ function toNext(interval) {
         if (playingDificulty.length > 0) {
           genWord();
         } else {
-          let span = document.createElement("span");
-          span.className = "good";
-          let spanText = document.createTextNode("Well Done");
-          span.appendChild(spanText);
-          result.appendChild(span);
+          document.querySelector(".checkmark").style.display = "block";
+          let control = document.querySelector(".control")
+          result.style.display = "none";
+          control.className = "avarage";
+          control.innerHTML = `${Math.trunc((+gotScore.innerHTML / +subCounter) * 60)} W / Min`;
           input.onkeyup = false;
           currentWord.innerHTML = "";
+          input.style.display = "none";
           tryAgain();
         }
         // Show The Result

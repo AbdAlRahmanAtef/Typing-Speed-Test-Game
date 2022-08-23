@@ -1,5 +1,8 @@
 :root {
-  --main-color: #2196f3;
+  --main-color: #00004b;
+  --main-color-alt: #446ccf;
+  --background-color: #000025;
+  --white: #fff;
 }
 * {
   box-sizing: border-box;
@@ -8,110 +11,141 @@
 }
 body {
   font-family: "Open Sans", sans-serif;
-  color: #009688;
 }
 .game {
-  background-color: #eee;
-  height: 100vh;
+  background-color: var(--background-color);
+  min-height: 100vh;
+  overflow: hidden;
 }
 .container {
   margin: auto;
   max-width: 1000px;
 }
-.select {
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #009688;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin: 10px 0;
-}
-.select label{
-  margin: 5px;
-}
-.select select {
-  text-align: center;
-  width: 300px;
-  padding: 5px 5px;
-  cursor: pointer;
-  font-size: 18px;
-  color: #009688;
-  border: 3px solid #009688;
-  border-radius: 6px;
-}
-.select select:focus {
-  outline: none;
-  border-color: var(--main-color);
-}
-
 .name {
   background-color: var(--main-color);
   color: white;
   padding: 20px;
-  font-size: 25px;
+  font-size: 30px;
   text-align: center;
-  font-weight: bold;
+  margin-bottom: 10px;
+  font-weight: 900;
 }
-.message {
-  background-color: white;
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 6px;
+.count-down {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: calc(100vh - 70px);
+  width: 100%;
+  display: none;
+  background-color: #00004b6b;
+  color: var(--main-color-alt);
+}
+.count-down span {
+  font-size: 60px;
+  font-weight: 900;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s;
+}
+.count-down span.hide {
+  opacity: 0;
+}
+.count-down span.show {
+  opacity: 1;
+}
+.intro {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+select {
   text-align: center;
+  height: 40px;
+  width: 150px;
+  background-color: var(--main-color);
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+}
+select:focus {
+  outline: none;
+  border: 2px solid transparent;
+  animation: on-off 3s infinite alternate;
+}
+
+.message {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--main-color-alt);
+  margin-bottom: 20px;
 }
 .message span {
+  font-size: 18px;
   font-weight: bold;
-  color: #009688;
+  color: var(--white);
 }
 .message span::before {
   content: "[ ";
+  color: var(--main-color-alt);
 }
 .message span::after {
   content: " ]";
+  color: var(--main-color-alt);
 }
 .start {
-  font-size: 20px;
+  font-size: 22px;
+  width: 200px;
+  margin: 50px auto;
   font-weight: bold;
   text-align: center;
-  border: 3px solid #009688;
-  background-color: #009688;
+  border: 3px solid var(--main-color);
+  animation: on-off 3s infinite alternate;
+  background-color: var(--main-color);
   color: white;
   padding: 10px 20px;
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 6px;
   cursor: pointer;
 }
 .start:hover {
-  border-color: #fff;
+  border-color: var(--main-color-alt);
 }
 .the-word {
   text-align: center;
   font-weight: bold;
   font-size: 50px;
-  color: var(--main-color);
+  color: var(--white);
   user-select: none;
 }
 .input {
-  margin: 15px 0;
-  width: 100%;
-  display: block;
-  padding: 15px;
-  border: 3px solid var(--main-color);
-  font-size: 20px;
+  margin: 15px auto;
+  width: 80%;
+  display: none;
+  height: 60px;
+  transition: 0.3s;
+  padding: 8px 15px;
+  border: 3px solid transparent;
+  font-size: 25px;
   text-align: center;
   text-transform: capitalize;
-  border-radius: 6px;
-  color: #2196f3;
-  caret-color: var(--main-color);
+  background-color: var(--main-color);
+  border-radius: 10px;
+  color: var(--white);
+  caret-color: var(--white);
 }
 .input:focus {
+  animation: on-off 3s infinite alternate;
   outline: none;
 }
 .upcoming-words {
-  background-color: white;
+  background-color: transparent;
+  opacity: 0;
+  transition: 0.3s;
   margin: 15px 0;
   padding: 15px;
   display: flex;
@@ -128,13 +162,28 @@ body {
 }
 .control {
   display: flex;
+  opacity: 0;
+  transition: 0.3s;
+  color: var(--white);
   justify-content: space-between;
-  background-color: white;
-  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .control span {
   font-weight: bold;
-  color: #009688;
+  color: var(--main-color-alt);
+}
+div.avarage {
+  width: fit-content;
+  font-size: 40px;
+  font-weight: 900;
+  border-radius: 10px;
+  animation: text 3s infinite alternate;
+  color: var(--white);
+  text-align: center;
+  margin: auto;
+  margin-top: -50px;
+  margin-bottom: 30px;
 }
 .finish {
   font-weight: bold;
@@ -143,34 +192,229 @@ body {
   padding: 15px;
 }
 .finish .good {
-  color: var(--main-color);
+  color: var(--white);
 }
 .finish .bad {
   color: red;
 }
 .try-again {
   width: 200px;
-  background-color: #009688;
+  background-color: var(--main-color);
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  border: 3px solid #009688;
+  border: 3px solid var(--main-color-alt);
+  animation: text 3s infinite alternate;
   padding: 10px;
   border-radius: 6px;
   margin: 10px auto;
   display: block;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
 }
 .try-again:hover {
-  border-color: #fff;
+  opacity: 0.8;
 }
-footer {
-  background-color: #222;
-  width: 300px;
-  padding: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
+.checkmark {
+  display: none;
   text-align: center;
+  transition: 0.3s;
+  width: 500px;
+  margin: -20px auto 0;
+  /* transform: rotate(-20deg); */
+}
+
+.path {
+  stroke-dasharray: 1000;
+  transform-origin: center center;
+  transform: rotate(-20deg);
+  stroke-dashoffset: 0;
+  animation: dash 3s ease-in-out;
+}
+
+.spin {
+  animation: spin 3s;
+  transform-origin: 50% 50%;
+}
+
+h1 {
+  color: var(--main-color-alt);
+  /* transform: rotate(20deg); */
+  font-size: 60px;
+  font-weight: 900;
+  margin: -10px auto 0px;
+  text-align: center;
+}
+.landing {
+  width: fit-content;
+  margin: -20px auto 40px;
+  transition: 0.3s;
+}
+svg {
+  width: 200px;
+  height: 200px;
+  transform: rotate(45deg);
+}
+.gradient {
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  fill: url("#gradient-fill");
+}
+.square {
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  transition-timing-function: ease-in-out;
+}
+
+.s1 {
+  animation-name: slide-1;
+}
+
+.s2 {
+  animation-name: slide-2;
+}
+
+.s3 {
+  animation-name: slide-3;
+}
+
+.s4 {
+  animation-name: slide-4;
+}
+
+.s5 {
+  animation-name: slide-5;
+}
+
+.s6 {
+  animation-name: slide-6;
+}
+
+.s7 {
+  animation-name: slide-7;
+}
+
+@keyframes slide-1 {
+  37.5% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+@keyframes slide-2 {
+  25% {
+    transform: translateX(0px);
+  }
+  37.5% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+@keyframes slide-3 {
+  12.5% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(100px);
+  }
+}
+
+@keyframes slide-4 {
+  50% {
+    transform: translateY(0px);
+  }
+  62.5% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes slide-5 {
+  12.5% {
+    transform: translate(-100px, 0px);
+  }
+  87.5% {
+    transform: translate(-100px, 0px);
+  }
+  100% {
+    transform: translate(-100px, 100px);
+  }
+}
+
+@keyframes slide-6 {
+  62.5% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes slide-7 {
+  75% {
+    transform: translateX(0px);
+  }
+  87.5% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(-100px);
+  }
+}
+@keyframes on-off {
+  0% {
+    border-color: #446ccf;
+    caret-color: #fff;
+  }
+  50% {
+    caret-color: rgba(255, 255, 255, 0.438);
+    border-color: #446bcf57;
+    /* border-color: var(--main-color-alt); */
+  }
+  100% {
+    border-color: #446ccf;
+    caret-color: #fff;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes text {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
