@@ -93,14 +93,6 @@ select:focus {
   font-weight: bold;
   color: var(--white);
 }
-/* .message span::before {
-  content: "[ ";
-  color: var(--main-color-alt);
-}
-.message span::after {
-  content: " ]";
-  color: var(--main-color-alt);
-} */
 .start {
   font-size: 22px;
   width: 200px;
