@@ -55,7 +55,6 @@ let progress = document.querySelector(".fill");
 let playingDificulty = easyLevelWords;
 levelSpan.innerHTML = "Easy";
 durationSpan.innerHTML = level.Easy;
-// localStorage.clear();
 let currentLevel;
 let currentlevelSeconds;
 if (window.localStorage.getItem("time")) {
