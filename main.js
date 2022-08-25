@@ -39,7 +39,7 @@ let level = {
   Normal: 5,
   Hard: 4,
 };
-let playingDificulty;
+// localStorage.clear();
 let selectLevel = document.querySelector("select");
 let levelSpan = document.querySelector(".lvl");
 let durationSpan = document.querySelector(".seconds");
@@ -52,7 +52,11 @@ let total = document.querySelector(".total");
 let start = document.querySelector(".start");
 let currentWord = document.querySelector(".the-word");
 let progress = document.querySelector(".fill");
-let currentLevel = "Easy";
+let playingDificulty = easyLevelWords;
+levelSpan.innerHTML = "Easy";
+durationSpan.innerHTML = level.Easy;
+// localStorage.clear();
+let currentLevel;
 let currentlevelSeconds;
 if (window.localStorage.getItem("time")) {
   document
@@ -95,7 +99,6 @@ window.onload = function () {
 input.onpaste = () => {
   return false;
 };
-
 let subCounter = 0;
 // Start The Game
 let countDown = document.querySelector(".count-down");
@@ -189,7 +192,7 @@ function startPlaying() {
         } else {
           document.querySelector(".checkmark").style.display = "block";
           input.style.display = "none";
-          progress.style.display = "none";
+          progress.style.display = "none"; 
           document.querySelector(".message").style.opacity = "0";
           let control = document.querySelector(".control");
           result.style.display = "none";
