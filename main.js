@@ -53,10 +53,11 @@ let start = document.querySelector(".start");
 let currentWord = document.querySelector(".the-word");
 let progress = document.querySelector(".fill");
 let playingDificulty = easyLevelWords;
-levelSpan.innerHTML = "Easy";
+let currentLevel = "Easy";
+levelSpan.innerHTML = currentLevel;
 durationSpan.innerHTML = level.Easy;
-let currentLevel;
-let currentlevelSeconds;
+let currentlevelSeconds = level[currentLevel];
+time.innerHTML = currentlevelSeconds;
 if (window.localStorage.getItem("time")) {
   document
     .querySelector(`[data-value="${window.localStorage.getItem("time")}"]`)
